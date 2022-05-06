@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QWidget>
 
+// Данный счетчик будем строить на базе одного класса Counter, наследуемого от QLineEdit.
 
 class Counter : public QLineEdit
 {
@@ -17,13 +18,13 @@ public:
     Counter(const QString &contents, QWidget *parent = nullptr) : QLineEdit(contents, parent) {}
 
 signals:
-    void tick_signal();
+    void tick_signal();//В производном классе предусмотрим соответствующие сигнал tick_signal() и слот add_one() из рис.2.10
 
 public slots:
     void add_one()
     {
-        QString str = text();
-        int r = str.toInt();
+        QString str = text();//Преобразуем строку в текст
+        int r = str.toInt();//Преобразуем текст в число
 
         if (r != 0 && r % 5 == 0)
         {
@@ -32,8 +33,8 @@ public slots:
 
         r++;
 
-        str.setNum(r);
-        setText(str);
+        str.setNum(r);//Преобразуем число в текст
+        setText(str);//показываем текст
     }
 };
 
@@ -42,7 +43,7 @@ class Win : public QWidget
     Q_OBJECT
 
 protected:
-
+    //Создание объекта интерфейса
     QLabel *label1, *label2;
     Counter *edit1, *edit2;
     QPushButton *calcbutton;
