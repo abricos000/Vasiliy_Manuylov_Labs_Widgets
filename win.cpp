@@ -3,6 +3,7 @@
 Win::Win(QWidget *parent)
     : QWidget(parent)
 {
+    // создаём объекты для интерфейса
     setWindowTitle("Счетчик");
 
     label1 = new QLabel("Cчет по 1", this);
@@ -11,7 +12,7 @@ Win::Win(QWidget *parent)
     edit2 = new Counter("0", this);
     calcbutton = new QPushButton("+1", this);
     exitbutton = new QPushButton("Выход", this);
-
+   // Добавляем елементы в BoxLayout
     QHBoxLayout *layout1 = new QHBoxLayout();
     layout1->addWidget(label1);
     layout1->addWidget(label2);
