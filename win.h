@@ -1,34 +1,56 @@
 #ifndef WIN_H
 #define WIN_H
 
+
 #include <QBoxLayout>
-#include <QFrame>
 #include <QLabel>
 #include <QLineEdit>
-#include <QMessageBox>
 #include <QPushButton>
-#include <QValidator>
 #include <QWidget>
 
-class Win : public QWidget // класс окна
-{
-    Q_OBJECT // макрос Qt, обеспечивающий корректное создание сигналов и слотов
 
-protected:
-    QFrame *frame; // рамка
-    QLabel *inputLabel; // метка ввода
-    QLineEdit *inputEdit; // строчный редактор ввода
-    QLabel *outputLabel; // метка вывода
-    QLineEdit *outputEdit; // строчный редактор вывода
-    QPushButton *nextButton; // кнопка Следующее
-    QPushButton *exitButton; // кнопка Выход
+class Counter : public QLineEdit
+{
+    Q_OBJECT
 
 public:
-    Win(QWidget *parent = nullptr); // конструктор
+    Counter(const QString &contents, QWidget *parent = nullptr) : QLineEdit(contents, parent) {}
+
+signals:
+    void tick_signal();
 
 public slots:
-    void begin();  // метод начальной настройки интерфейса
-    void calc(); // метод реализации вычислений
+    void add_one()
+    {
+        QString str = text();
+        int r = str.toInt();
+
+        if (r != 0 && r % 5 == 0)
+        {
+            emit tick_signal();
+        }
+
+        r++;
+
+        str.setNum(r);
+        setText(str);
+    }
 };
+
+class Win : public QWidget
+{
+    Q_OBJECT
+
+protected:
+
+    QLabel *label1, *label2;
+    Counter *edit1, *edit2;
+    QPushButton *calcbutton;
+    QPushButton *exitbutton;
+
+public:
+    Win(QWidget *parent = nullptr);
+};
+
 
 #endif // WIN_H
