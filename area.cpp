@@ -41,5 +41,4 @@ Area::~Area()
     delete myline;
     delete myrect;
 }
-© 2022 GitHub, Inc.
-Term
+

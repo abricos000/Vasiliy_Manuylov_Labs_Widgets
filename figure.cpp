@@ -1,5 +1,5 @@
 #include <math.h>
-#include "figura.h"
+#include "figure.h"
 void Figura::move(float Alpha,QPainter *Painter)
 {
     dx=halflen*cos(Alpha);//координата вращения по оси x
